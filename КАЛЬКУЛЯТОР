@@ -1,0 +1,106 @@
+package main
+
+import "fmt"
+
+func number(num0 string) int {
+    if num0 == "1" || num0 == "I" {
+        return 1
+    }else if num0 == "2" || num0 == "II" {
+        return 2
+    }else if num0 == "3" || num0 == "III" {
+        return 3
+    }else if num0 == "4" || num0 == "IV" {
+        return 4
+    }else if num0 == "5" || num0 == "V" {
+        return 5
+    }else if num0 == "6" || num0 == "VI" {
+        return 6
+    }else if num0 == "7" || num0 == "VII" {
+        return 7
+    }else if num0 == "8" || num0 == "VIII" {
+        return 8
+    }else if num0 == "9" || num0 == "IX" {
+        return 9
+    }else if num0 == "10" || num0 == "X" {
+        return 10
+    }else{
+        return 999
+    }      
+}
+
+func romane_D(num string) bool {
+    if num == "I" || num == "II" || num == "III" || num == "IV" || num == "V" || num == "VI" || num == "VII" || num == "VIII" || num == "IX" || num == "X" {
+        return true 
+    }else{
+        return false 
+    }
+}
+
+func calculate(num1, num2 int, operator string) int {
+    switch operator {
+    case "+":
+		      return num1 + num2
+    case "-":
+		      return num1 - num2
+    case "*":
+      		return num1 * num2
+    case "/":
+      		return num1 / num2
+    default:
+        return 999
+	}
+}
+
+
+func arabicToRoman(num int) string {
+
+    vals := []int{100, 90, 50, 40, 10, 9, 5, 4, 1}
+    symbols := []string{"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+    var romanRes string 
+
+    for i := 0; i < len(vals); i++ {
+        for num >= vals[i] {
+            num -= vals[i]
+            romanRes += symbols[i]
+    }
+}
+
+return romanRes
+}
+
+
+func main() {
+    
+    var a, operation, b string 
+    fmt.Scanln(&a, &operation, &b)
+
+    num1 := number(a)
+    num2 := number(b)
+    romane_a := romane_D(a)
+    romane_b := romane_D(b)
+    
+    if num1 == 999 || num2 == 999{
+        fmt.Println("Ошибка: неподходящее число")
+    }else if (romane_a == true && romane_b == false) || (romane_a == false && romane_b == true) {
+        fmt.Println("Ошибка: числа из разных систем")
+    }else{
+        res := calculate(num1, num2, operation)
+        
+        
+        if res!= 999{
+
+            if romane_a == false{
+                fmt.Println(res)
+            }else{
+                if res > 0{
+                    romanRes := arabicToRoman(res)
+                fmt.Println(romanRes)
+                }else{
+                fmt.Println("В римской системе не существует отрицательных чисел")
+                }           
+            } 
+        }else{
+            fmt.Println("Неизвестная операция")
+        }
+   } 
+}
